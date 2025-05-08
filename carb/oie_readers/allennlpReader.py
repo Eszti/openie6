@@ -62,6 +62,10 @@ class AllennlpReader(OieReader):
                 arg2 = line[line.index('<arg2>') + 6:line.index('</arg2>')]
             except:
                 arg2 = ""
+            try:
+                rule = line[line.index('<rule>') + 6:line.index('</rule>')]
+            except:
+                rule = ""
 
             if(type(self.threshold) != type(None) and float(confidence) < self.threshold):
                 continue
@@ -75,6 +79,7 @@ class AllennlpReader(OieReader):
             curExtraction = Extraction(pred = rel, head_pred_index = -1, sent = text, confidence = float(confidence))
             curExtraction.addArg(arg1)
             curExtraction.addArg(arg2)
+            curExtraction.rule = rule
             #for arg in args:
             #    curExtraction.addArg(arg)
             d[text] = d.get(text, []) + [curExtraction]

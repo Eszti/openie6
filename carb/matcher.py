@@ -85,7 +85,31 @@ class Matcher:
         # sEx = ex.bow()
         # bleu = sentence_bleu(references = [sRef.split(' ')], hypothesis = sEx.split(' '))
         # return bleu > Matcher.BLEU_THRESHOLD
-        
+
+    @staticmethod
+    def exactMatch(ref, ex, ignoreStopwords, ignoreCase):
+        if ex.pred.strip() not in ref.pred.split(' '):
+            # print(ref.pred.split(' '))
+            # print(ex.pred)
+            # print()
+            return False
+
+        # print(ref.args)
+        # print(ex.args)
+        # print()
+        if len(ref.args) != len(ex.args):
+            return False
+
+        for ref_arg, ex_arg in zip(list(ref.args), list(ex.args)):
+            if ref_arg != ex_arg.strip():
+                return False
+        #
+        # print(ref)
+        # print(ex)
+        # print()
+
+        return True
+
 
     @staticmethod
     def lexicalMatch(ref, ex, ignoreStopwords, ignoreCase):

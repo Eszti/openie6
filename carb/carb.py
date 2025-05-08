@@ -498,7 +498,10 @@ if __name__ == '__main__':
         matchingFunc = Matcher.bert_score_match
 
     elif args['--bleuMatch']:
-        matchingFunc = Matcher.bleuMatch        
+        matchingFunc = Matcher.bleuMatch
+
+    elif args['--exactMatch']:
+        matchingFunc = Matcher.exactMatch
 
     else:
         matchingFunc = Matcher.binary_linient_tuple_match
@@ -512,6 +515,14 @@ if __name__ == '__main__':
         strategy = 'ss'
     else:
         strategy = 'sm'
+
+
+    filter_pred = []
+    # filter_pred = [(13, 0)]
+
+    for sen_id, ex_id in filter_pred:
+        del predicted.oie[list(predicted.oie.keys())[sen_id]][ex_id]
+
 
     auc, optimal_f1_point, zero_conf_point = b.compare(predicted = predicted.oie,
                             matchingFunc = matchingFunc,
