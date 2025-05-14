@@ -1,4 +1,6 @@
 from __future__ import division
+
+import itertools
 import string
 from nltk.translate.bleu_score import sentence_bleu
 from nltk.corpus import stopwords
@@ -94,15 +96,20 @@ class Matcher:
             # print()
             return False
 
-        # print(ref.args)
-        # print(ex.args)
-        # print()
         if len(ref.args) != len(ex.args):
             return False
 
-        for ref_arg, ex_arg in zip(list(ref.args), list(ex.args)):
-            if ref_arg != ex_arg.strip():
-                return False
+        # for ref_arg, ex_arg in zip(list(ref.args), list(ex.args)):
+        #     if ref_arg != ex_arg.strip():
+        #         return False
+
+        if list(ref.args)[0] != list(ex.args)[0].strip():
+            return False
+
+        arg2_ref_words  = list(itertools.chain(*[a.split(' ') for a in ref.args[1:]]))
+        arg2_ex_words = list(itertools.chain(*[a.strip().split(' ') for a in ex.args[1:]]))
+        if arg2_ref_words != arg2_ex_words:
+            return False
         #
         # print(ref)
         # print(ex)
