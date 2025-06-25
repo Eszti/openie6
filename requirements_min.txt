@@ -1,0 +1,16 @@
+spacy==2.3.0
+regex==2020.6.8
+ipdb==0.13.3
+nltk==3.5
+torchtext==0.5.0
+transformers==2.6.0
+pytorch-lightning==0.7.6
+sklearn==0.0
+scikit-learn==0.23.1
+docopt==0.6.2
+overrides==3.1.0
+toolz
+./imojie/allennlp
+./imojie/pytorch_transformers
+https://github.com/explosion/spacy-models/releases/download/en_core_web_sm-2.3.0/en_core_web_sm-2.3.0.tar.gz#egg=en_core_web_sm
+
