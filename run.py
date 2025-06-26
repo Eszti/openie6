@@ -257,6 +257,7 @@ def splitpredict(hparams, checkpoint_callback, meta_data_vocab, train_dataloader
 
         all_predictions, sentence_str = [], ''
         for line_i, line in enumerate(rescored):
+            print(line)
             fields = line.split('\t')
             sentence = fields[0]
             confidence = float(fields[2])
